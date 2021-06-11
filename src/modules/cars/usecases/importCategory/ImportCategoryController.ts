@@ -5,10 +5,9 @@ export class ImportCategoryController {
   constructor(private importCategoryUsecase: ImportCategoryUsecase) {}
 
   handle(req: Request, res: Response): Response {
-    const { file } = req.body;
+    const { file } = req;
 
     this.importCategoryUsecase.execute(file);
-    console.log(file);
 
     return res.send();
   }
