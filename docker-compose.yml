@@ -1,10 +1,32 @@
 version: '3.7'
 
 services:
+  database_rentx:
+    image: postgres
+    container_name: database_rentx
+    restart: always
+    ports:
+      - 5432:5432
+    extra_hosts:
+      - localhost:192.168.18.12
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=rentx
+      - POSTGRES_DB=rentx
+    volumes:
+      - pgdata:/data/postgres
+    network_mode: host
   app:
     build: .
     container_name: rentx
     ports:
       - 3334:3334
+    extra_hosts:
+      - localhost:192.168.18.12
     volumes:
       - .:/usr/app
+    network_mode: host
+
+volumes:
+  pgdata:
+    driver: local
