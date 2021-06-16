@@ -1,15 +1,15 @@
-import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
-import { CreateCategoryController } from './CreateCategoryController';
-import { CreateCategoryUsecase } from './CreateCategoryUsecase';
+// import { CategoriesRepository } from '../../repositories/implementations/CategoriesRepository';
+// import { CreateCategoryController } from './CreateCategoryController';
+// import { CreateCategoryUsecase } from './CreateCategoryUsecase';
 
-export default (): CreateCategoryController => {
-  const categoriesRepository = new CategoriesRepository();
+// export default (): CreateCategoryController => {
+//   const categoriesRepository = new CategoriesRepository();
 
-  const createCategoryUsecase = new CreateCategoryUsecase(categoriesRepository);
+//   const createCategoryUsecase = new CreateCategoryUsecase(categoriesRepository);
 
-  const createCategoryController = new CreateCategoryController(
-    createCategoryUsecase
-  );
+//   const createCategoryController = new CreateCategoryController(
+//     createCategoryUsecase
+//   );
 
-  return createCategoryController;
-};
+//   return createCategoryController;
+// };
