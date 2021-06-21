@@ -10,6 +10,6 @@ export class ImportCategoryController {
 
     await importCategoryUsecase.execute(file);
 
-    return res.send();
+    return res.status(201).send();
   }
 }
