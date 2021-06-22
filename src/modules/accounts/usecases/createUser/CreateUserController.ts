@@ -4,12 +4,11 @@ import { CreateUserUsecase } from './CreateUserUsecase';
 
 export class CreateUserController {
   async handle(req: Request, res: Response): Promise<Response> {
-    const { name, username, email, password, driver_license } = req.body;
+    const { name, email, password, driver_license } = req.body;
     const createUserUsecase = container.resolve(CreateUserUsecase);
 
     await createUserUsecase.execute({
       name,
-      username,
       email,
       password,
       driver_license,
