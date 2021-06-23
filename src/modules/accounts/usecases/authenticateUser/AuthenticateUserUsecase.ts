@@ -44,9 +44,14 @@ export class AuthenticateUserUsecase {
       expiresIn: process.env.JWT_EXPIRES_IN,
     });
 
-    return {
-      user,
+    const tokenReturn: IResponse = {
       token,
+      user: {
+        name: user.name,
+        email: user.email,
+      },
     };
+
+    return tokenReturn;
   }
 }
