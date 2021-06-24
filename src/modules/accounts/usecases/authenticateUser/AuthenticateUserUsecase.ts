@@ -40,9 +40,9 @@ export class AuthenticateUserUsecase {
     }
 
     // 3) Generate jsonwebtoken
-    const token = sign({}, process.env.JWT_SECRET, {
+    const token = sign({}, 'b17a771fab2fe4415bd69ce0256ee132', {
       subject: user.id,
-      expiresIn: process.env.JWT_EXPIRES_IN,
+      expiresIn: '1d',
     });
 
     const tokenReturn: IResponse = {
