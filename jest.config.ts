@@ -1,8 +1,8 @@
 export default {
+  // baseUrl: '.',
   bail: true,
   clearMocks: true,
   testEnviroment: 'node',
-  baseUrl: './',
   coverageProvider: 'v8',
   preset: 'ts-jest',
   testMatch: ['**/*.spec.ts'],
