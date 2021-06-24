@@ -1,7 +1,7 @@
-import { AppError } from '@errors/AppError';
 import { ICreateUserDTO } from '@modules/accounts/DTOs/ICreateUserDTO';
 import { UsersRepositoryInMemory } from '@modules/accounts/repositories/in-memory/UsersRepositoryInMemory';
 import { CreateUserUsecase } from '@modules/accounts/usecases/createUser/CreateUserUsecase';
+import { AppError } from '@shared/errors/AppError';
 import { AuthenticateUserUsecase } from './AuthenticateUserUsecase';
 
 let authenticateUserUsecase: AuthenticateUserUsecase;
