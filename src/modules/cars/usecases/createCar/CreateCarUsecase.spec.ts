@@ -48,4 +48,18 @@ describe('Create Car', () => {
       });
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  test('Should be able to create a car available true by default', async () => {
+    const car = await createCarUsecase.execute({
+      name: 'Available car',
+      description: 'description_car',
+      category_id: 'category',
+      brand: 'test brand',
+      daily_rate: 100,
+      fine_amount: 60,
+      license_plate: 'TES-0001',
+    });
+
+    expect(car.available).toBe(true);
+  });
 });
