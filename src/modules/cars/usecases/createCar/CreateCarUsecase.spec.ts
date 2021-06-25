@@ -24,4 +24,28 @@ describe('Create Car', () => {
 
     expect(car).toHaveProperty('id');
   });
+
+  test('Should not be able to create a car with existing license plate', () => {
+    expect(async () => {
+      await createCarUsecase.execute({
+        name: 'Test car1',
+        description: 'description_car',
+        category_id: 'category',
+        brand: 'test brand',
+        daily_rate: 100,
+        fine_amount: 60,
+        license_plate: 'TES-0001',
+      });
+
+      await createCarUsecase.execute({
+        name: 'Test car2',
+        description: 'description_car',
+        category_id: 'category',
+        brand: 'test brand',
+        daily_rate: 100,
+        fine_amount: 60,
+        license_plate: 'TES-0001',
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
