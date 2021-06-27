@@ -23,4 +23,22 @@ describe('Create Car Specification', () => {
       });
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  test('Should be able to add a new specification to a car', async () => {
+    const car = await carsRepositoryInMemory.create({
+      name: 'Car',
+      description: 'description_car',
+      category_id: 'category',
+      brand: 'test brand',
+      daily_rate: 100,
+      fine_amount: 60,
+      license_plate: 'TES-0001',
+    });
+
+    const specifications_id = ['54321'];
+    await createCarSpecificationUsecase.execute({
+      car_id: car.id,
+      specifications_id,
+    });
+  });
 });
