@@ -7,9 +7,12 @@ interface IRequest {
   brand?: string;
   name?: string;
 }
-// @injectable()
+@injectable()
 export class ListAvailableCarsUsecase {
-  constructor(private carsRepository: ICarsRepository) {}
+  constructor(
+    @inject('CarsRepository')
+    private carsRepository: ICarsRepository
+  ) {}
 
   async execute({ brand, category_id, name }: IRequest): Promise<Car[]> {
     const cars = await this.carsRepository.findAvailable(
