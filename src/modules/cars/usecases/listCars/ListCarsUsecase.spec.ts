@@ -21,7 +21,25 @@ describe('List Cars', () => {
       name: 'Car A-1',
     });
 
-    const cars = await listCarsUsecase.execute();
+    const cars = await listCarsUsecase.execute({});
+
+    expect(cars).toEqual([car]);
+  });
+
+  test('Should be able to list all available cars by name', async () => {
+    const car = await carsRepositoryInMemory.create({
+      brand: 'Car_brand_test',
+      category_id: 'category_id',
+      daily_rate: 110.0,
+      description: 'Car Test',
+      fine_amount: 100,
+      license_plate: 'DEF-4140',
+      name: 'Car A-1',
+    });
+
+    const cars = await listCarsUsecase.execute({
+      brand: 'Car_brand_test',
+    });
 
     expect(cars).toEqual([car]);
   });
