@@ -14,7 +14,7 @@ export class CreateCarSpecificationUsecase {
   constructor(
     @inject('CarsRepository')
     private carsRepository: ICarsRepository,
-    @inject('SpecificationsReopsitory')
+    @inject('SpecificationsRepository')
     private specificationsRepository: ISpecificationRepository
   ) {}
 
