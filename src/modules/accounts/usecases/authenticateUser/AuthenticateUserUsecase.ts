@@ -42,7 +42,7 @@ export class AuthenticateUserUsecase {
     // 3) Generate jsonwebtoken
     const token = sign({}, 'b17a771fab2fe4415bd69ce0256ee132', {
       subject: user.id,
-      expiresIn: '1d',
+      expiresIn: '90d',
     });
 
     const tokenReturn: IResponse = {
