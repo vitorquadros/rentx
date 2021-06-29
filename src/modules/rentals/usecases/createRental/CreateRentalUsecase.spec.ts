@@ -37,4 +37,20 @@ describe('Create Rental', () => {
       });
     }).rejects.toBeInstanceOf(AppError);
   });
+
+  test('Should not be able to create a new rental if the car already has an active rental', async () => {
+    expect(async () => {
+      await createRentalUsecase.execute({
+        user_id: 'user1',
+        car_id: 'same_id',
+        expected_return_date: new Date(),
+      });
+
+      await createRentalUsecase.execute({
+        user_id: 'user2',
+        car_id: 'same_id',
+        expected_return_date: new Date(),
+      });
+    }).rejects.toBeInstanceOf(AppError);
+  });
 });
