@@ -1,5 +1,7 @@
 import { inject, injectable } from 'tsyringe';
 import { v4 as uuid } from 'uuid';
+import { resolve } from 'path';
+
 import { UsersTokensRepository } from '@modules/accounts/infra/typeorm/repositories/UsersTokensRepository';
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository';
 import { AppError } from '@shared/errors/AppError';
@@ -22,6 +24,15 @@ export class SendForgotPasswordMailUsecase {
   async execute(email: string): Promise<void> {
     const user = await this.usersRepository.findByEmail(email);
 
+    const templatePath = resolve(
+      __dirname,
+      '..',
+      '..',
+      'views',
+      'emails',
+      'forgotPassword.hbs'
+    );
+
     if (!user) {
       throw new AppError('User does not exists');
     }
@@ -36,10 +47,16 @@ export class SendForgotPasswordMailUsecase {
       expires_date,
     });
 
+    const variables = {
+      name: user.name,
+      link: `${process.env.FORGOT_MAIL_URL}${token}`,
+    };
+
     await this.mailProvider.sendMail(
       email,
       'Password Recover',
-      `The link to reset your password is ${token}`
+      variables,
+      templatePath
     );
   }
 }
