@@ -7,6 +7,7 @@ import {
   PrimaryColumn,
 } from 'typeorm';
 import { User } from './User';
+import { v4 as uuid } from 'uuid';
 
 @Entity('users_tokens')
 export class UserTokens {
@@ -28,4 +29,10 @@ export class UserTokens {
 
   @CreateDateColumn()
   created_at: Date;
+
+  constructor() {
+    if (!this.id) {
+      this.id = uuid();
+    }
+  }
 }
