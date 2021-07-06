@@ -31,16 +31,16 @@ describe('List Categories Controller', () => {
       .post('/sessions')
       .send({ email: 'admin@test.com', password: 'admin' });
 
-    const { token } = responseToken.body;
+    const { refresh_token } = responseToken.body;
 
-    const res2 = await request(app)
+    await request(app)
       .post('/categories')
       .send({
         name: 'Test Category',
         description: 'test description',
       })
       .set({
-        Authorization: `Bearer ${token}`,
+        Authorization: `Bearer ${refresh_token}`,
       });
 
     const response = await request(app).get('/categories');
