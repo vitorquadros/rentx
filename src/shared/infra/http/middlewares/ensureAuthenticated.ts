@@ -16,8 +16,6 @@ export async function ensureAuthentication(
 ): Promise<void> {
   const authHeader = req.headers.authorization;
 
-  const userTokensRepository = new UsersTokensRepository();
-
   if (!authHeader) {
     throw new AppError('Missing token', 401);
   }
@@ -25,20 +23,7 @@ export async function ensureAuthentication(
   const [, token] = authHeader.split(' ');
 
   try {
-    const { sub: user_id } = verify(
-      token,
-      auth.jwt_refresh_token_secret
-    ) as IPayload;
-
-    const usersRepository = new UsersRepository();
-    const user = await userTokensRepository.findByUserIdAndRefreshToken(
-      user_id,
-      token
-    );
-
-    if (!user) {
-      throw new AppError('User does not exists', 401);
-    }
+    const { sub: user_id } = verify(token, auth.jwt_secret) as IPayload;
 
     req.user = {
       id: user_id,
