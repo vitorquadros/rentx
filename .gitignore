@@ -2,5 +2,5 @@ node_modules
 tmp
 .env
 README.md
-.github
 coverage
+dist
